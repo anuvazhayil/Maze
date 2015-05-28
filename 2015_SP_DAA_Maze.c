@@ -318,6 +318,26 @@ int main(void) {
  */
 
 int solveMazeRec(int row, int col) {
+	if(row >= 0 && row < MATRIX_SIZE && col >= 0 && col < MATRIX_SIZE && maze[row][col] == 0){
+                if(row == (MATRIX_SIZE-1)) {
+                        maze[row][col] = 2;
+                        return 1;
+                }
+                maze[row][col] = 2;
+                if(solveMazeRec(row,col-1) == 1) {
+                        return 1;
+                }
+                if(solveMazeRec(row+1,col) == 1) {
+                        return 1;
+                }
+                if(solveMazeRec(row,col+1) == 1) {
+                        return 1;
+                }
+                if(solveMazeRec(row-1,col) == 1) {
+                        return 1;
+                }
+                maze[row][col] = 0;
+        }
 	return 0;
 }
 
