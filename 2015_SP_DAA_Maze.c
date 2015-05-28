@@ -459,8 +459,22 @@ void solveMazeIt(int row, int col) {
 	maze[row][col] = 2; // drop a bread crumb in the starting square
 	while (row < MATRIX_SIZE - 1) { // the exit is the only open square
 				// in the last row
-
-		/* the rest of this loop is yours */
-
-	}
+		int trow = row, tcol = col;
+                adjacentCell(row, col, dir, &trow, &tcol);
+                if (isOK(trow,tcol)) {
+                        if (maze[trow][tcol] == 2) {
+                                maze[row][col] = 0;
+                        }
+                        else {
+                                maze[row][col] = 2;
+                        }
+                        row = trow;
+                        col = tcol;
+                        dir = turnRight(dir);
+                }
+                else {
+                        dir = turnLeft(dir);
+                }
+        }
+        maze[row][col] = 2;
 }
